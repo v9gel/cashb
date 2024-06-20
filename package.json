@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "19.0.0-rc-e684ca66ab-20240619",
+    "react-dom": "19.0.0-rc-e684ca66ab-20240619"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",
@@ -23,6 +23,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
     "typescript": "^5.0.2",
-    "vite": "^4.4.0"
+    "vite": "^5.3.1"
   }
 }
