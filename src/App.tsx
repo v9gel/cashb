@@ -1,5 +1,11 @@
-function App() {
-  return <h1 className="text-3xl font-bold underline">cash-b</h1>;
-}
+import { App } from "konsta/react";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
 
-export default App;
+export default function MyApp() {
+  return (
+    <App theme="ios">
+      <RouterProvider router={router} />
+    </App>
+  );
+}
