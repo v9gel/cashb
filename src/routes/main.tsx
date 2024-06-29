@@ -1,46 +1,30 @@
-import { BlockTitle, List, ListItem, Page } from "konsta/react";
-import alfabankLogo from "@/assets/banks/alfabank.svg";
-import ozonLogo from "@/assets/banks/ozon.svg";
-import yandexLogo from "@/assets/banks/yandex.svg";
-import tbankLogo from "@/assets/banks/tbank.svg";
 import addCircle24Icon from "@/assets/icons/add-circle-24.svg";
+import { AddEditCardSheet } from "@/components/add-edit-card-sheet";
+import { useCardsStore } from "@/stores";
+import { getBankFromId } from "@/stores/cards-store/helpers";
+import { BlockTitle, List, ListItem, Page } from "konsta/react";
+import { useState } from "react";
 
 export const Main = () => {
+  const [sheetOpened, setSheetOpened] = useState(false);
+  const { cards } = useCardsStore();
+
   return (
     <Page>
       <BlockTitle>Карты</BlockTitle>
       <List strongIos outlineIos insetIos>
-        <ListItem
-          media={
-            <img
-              src={alfabankLogo}
-              width={28}
-              height={28}
-              alt="alfabank logo"
+        {cards.map((card) => {
+          const bank = getBankFromId(card.bank);
+
+          return (
+            <ListItem
+              media={bank?.logo}
+              title={card.title}
+              link
+              key={card.id}
             />
-          }
-          title="Альфабанк"
-          link
-        />
-        <ListItem
-          media={<img src={ozonLogo} width={28} height={28} alt="ozon logo" />}
-          title="Озон"
-          link
-        />
-        <ListItem
-          media={
-            <img src={yandexLogo} width={28} height={28} alt="yandex logo" />
-          }
-          title="Яндекс"
-          link
-        />
-        <ListItem
-          media={
-            <img src={tbankLogo} width={28} height={28} alt="tbank logo" />
-          }
-          title="Т-Банк"
-          link
-        />
+          );
+        })}
         <ListItem
           media={
             <img
@@ -51,8 +35,13 @@ export const Main = () => {
             />
           }
           title="Добавить карту..."
+          onClick={() => setSheetOpened(true)}
         />
       </List>
+      <AddEditCardSheet
+        isOpened={sheetOpened}
+        close={() => setSheetOpened(false)}
+      />
     </Page>
   );
 };
