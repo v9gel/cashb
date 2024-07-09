@@ -1,14 +1,17 @@
 import { ListInput } from "konsta/react";
-import { Controller, Control, FieldValues } from "react-hook-form";
+import { Controller, Control, FieldValues, FieldPath } from "react-hook-form";
 
 type ListInputProps = React.ComponentProps<typeof ListInput>;
 
-type Props = {
-  control?: Control<FieldValues>;
-  name: string;
+export type Props<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+> = {
+  name: TName;
+  control?: Control<TFieldValues>;
 } & ListInputProps;
 
-export const ListInputControlled = (props: Props) => {
+export const ListInputControlled = <T extends FieldValues>(props: Props<T>) => {
   const { control, name, ...restProps } = props;
 
   return (

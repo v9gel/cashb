@@ -82,8 +82,7 @@ export const AddEditCardSheet = ({ isOpened, close }: Props) => {
 
   const swiperRef = useRef<SwiperRef>(null);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (e) => {
+  const handleSearch = (e: any) => {
     setSearchQuery(e.target.value);
   };
   const handleClear = () => {

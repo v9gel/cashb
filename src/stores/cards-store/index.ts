@@ -1,6 +1,5 @@
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
-import type {} from "@redux-devtools/extension"; // необходимо для отладки
+import { persist } from "zustand/middleware";
 import { Card } from "./types";
 
 interface BearState {
@@ -11,7 +10,6 @@ interface BearState {
 }
 
 export const useCardsStore = create<BearState>()(
-  devtools(
     persist(
       (set) => ({
         cards: [],
@@ -25,5 +23,4 @@ export const useCardsStore = create<BearState>()(
         name: "cards-storage",
       }
     )
-  )
 );
