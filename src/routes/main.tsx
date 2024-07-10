@@ -4,7 +4,7 @@ import { useCardsStore } from "@/stores";
 import { getBankFromId } from "@/stores/cards-store/helpers";
 import { Card } from "@/stores/cards-store/types";
 import { SwipeableListItem } from "@/ui/swipeable-list-item";
-import { BlockTitle, List, ListItem, Page } from "konsta/react";
+import { Badge, BlockTitle, List, ListItem, Page } from "konsta/react";
 import { useState } from "react";
 
 export const Main = () => {
@@ -28,6 +28,7 @@ export const Main = () => {
               onEdit={() => {
                 setSheetOpened(card);
               }}
+              after={<Badge>Не выбран</Badge>}
             />
           );
         })}
