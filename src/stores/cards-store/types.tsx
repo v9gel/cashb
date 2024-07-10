@@ -9,24 +9,31 @@ export interface Bank {
   logo: React.ReactNode;
 }
 
+export enum Banks {
+  Alfabank = "alfabank",
+  Tbank = "tbank",
+  Ozon = "ozon",
+  Yandex = "yandex",
+}
+
 export const BANKS: Bank[] = [
   {
-    id: "alfabank",
+    id: Banks.Alfabank,
     name: "Альфа-банк",
     logo: <img src={alfabankLogo} width={28} height={28} alt="alfabank logo" />,
   },
   {
-    id: "tbank",
+    id: Banks.Tbank,
     name: "Т-Банк",
     logo: <img src={tbankLogo} width={28} height={28} alt="tbank logo" />,
   },
   {
-    id: "ozon",
+    id: Banks.Ozon,
     name: "Ozon",
     logo: <img src={ozonLogo} width={28} height={28} alt="ozon logo" />,
   },
   {
-    id: "yandex",
+    id: Banks.Yandex,
     name: "Яндекс",
     logo: <img src={yandexLogo} width={28} height={28} alt="yandex logo" />,
   },
