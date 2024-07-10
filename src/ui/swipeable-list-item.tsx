@@ -45,7 +45,7 @@ export const SwipeableListItem = (props: Props) => {
       }}
       hideDotsButton
       height={"45.5px"}
-      actionButtonMinWidth={70}
+      actionButtonMinWidth={80}
     >
       <ListItem {...restProps} className="w-full" />
     </SwipeToRevealActions>
