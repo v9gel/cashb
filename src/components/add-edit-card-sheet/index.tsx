@@ -1,6 +1,6 @@
 import { useCardsStore } from "@/stores";
 import { genCardId, getBankFromId } from "@/stores/cards-store/helpers";
-import { BANKS } from "@/stores/cards-store/types";
+import { BANKS, Card } from "@/stores/cards-store/types";
 import { ListInputControlled } from "@/ui/list-input-controlled";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -21,7 +21,7 @@ import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 interface Props {
-  isOpened: boolean;
+  isOpened: boolean | Card;
   close: () => void;
 }
 
@@ -33,11 +33,18 @@ const CardSchema = z.object({
 
 type CardSchemaType = z.infer<typeof CardSchema>;
 
-const defaultValues = { id: genCardId(), title: "", bank: BANKS[0].id };
+const DEFAULT_VALUES = { id: genCardId(), title: "", bank: BANKS[0].id };
 
 export const AddEditCardSheet = ({ isOpened, close }: Props) => {
-  const { addCard } = useCardsStore();
+  const { addCard, updateCard } = useCardsStore();
   const firstInputId = useRef("first-input-" + nanoid());
+  let defaultValues = DEFAULT_VALUES;
+
+  const isEdit = typeof isOpened !== "boolean";
+
+  if (typeof isOpened !== "boolean") {
+    defaultValues = isOpened ?? DEFAULT_VALUES;
+  }
 
   const {
     control,
@@ -66,7 +73,12 @@ export const AddEditCardSheet = ({ isOpened, close }: Props) => {
 
   const submitHandler = () => {
     return handleSubmit((data) => {
-      addCard(data);
+      if (isEdit) {
+        updateCard(data);
+      } else {
+        addCard(data);
+      }
+
       resetForm();
       close();
     })();
@@ -77,6 +89,9 @@ export const AddEditCardSheet = ({ isOpened, close }: Props) => {
       // пока что костыль с фокусом через id, тк konsta не отдает ref
       // setFocus("title");
       document.getElementById(firstInputId.current)?.focus();
+      if (isOpened) {
+        resetForm();
+      }
     }
   }, [isOpened]);
 
@@ -103,7 +118,7 @@ export const AddEditCardSheet = ({ isOpened, close }: Props) => {
   return (
     <Sheet
       className="pb-safe w-full"
-      opened={isOpened}
+      opened={Boolean(isOpened)}
       onBackdropClick={cancelHandler}
       autoFocus
     >

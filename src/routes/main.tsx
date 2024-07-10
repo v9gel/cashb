@@ -2,12 +2,13 @@ import addCircle24Icon from "@/assets/icons/add-circle-24.svg";
 import { AddEditCardSheet } from "@/components/add-edit-card-sheet";
 import { useCardsStore } from "@/stores";
 import { getBankFromId } from "@/stores/cards-store/helpers";
+import { Card } from "@/stores/cards-store/types";
 import { SwipeableListItem } from "@/ui/swipeable-list-item";
 import { BlockTitle, List, ListItem, Page } from "konsta/react";
 import { useState } from "react";
 
 export const Main = () => {
-  const [sheetOpened, setSheetOpened] = useState(false);
+  const [sheetOpened, setSheetOpened] = useState<boolean | Card>(false);
   const { cards, removeCard } = useCardsStore();
 
   return (
@@ -24,6 +25,9 @@ export const Main = () => {
               link
               key={card.id}
               onDelete={() => removeCard(card.id)}
+              onEdit={() => {
+                setSheetOpened(card);
+              }}
             />
           );
         })}
@@ -42,7 +46,9 @@ export const Main = () => {
       </List>
       <AddEditCardSheet
         isOpened={sheetOpened}
-        close={() => setSheetOpened(false)}
+        close={() => {
+          setSheetOpened(false);
+        }}
       />
     </Page>
   );
