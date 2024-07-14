@@ -5,6 +5,6 @@ export const genCardId = () => {
   return "card-" + nanoid(7);
 };
 
-export function getBankFromId(id: string): Bank | undefined {
+export function getBankFromId(id: string | undefined): Bank | undefined {
   return BANKS.find((bank: Bank) => bank.id === id);
 }

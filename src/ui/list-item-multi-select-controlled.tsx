@@ -11,15 +11,16 @@ import { useState } from "react";
 import { Controller, Control, FieldValues, FieldPath } from "react-hook-form";
 import { ListItemIcon } from "./list-item-icon";
 import { createPortal } from "react-dom";
-import { checkIcon24 } from "@/assets/icons";
+import { IoCheckmark } from "react-icons/io5";
 
 type SelectProps = {
   label: string;
   items: {
     id: string;
     name: string;
-    icon: string;
+    icon?: string;
   }[];
+  hideIcon?: boolean;
 };
 
 export type Props<
@@ -30,10 +31,10 @@ export type Props<
   control: Control<TFieldValues>;
 } & SelectProps;
 
-export const ListSelectControlled = <T extends FieldValues>(
+export const ListItemMultiSelectControlled = <T extends FieldValues>(
   props: Props<T>
 ) => {
-  const { control, name, label, items } = props;
+  const { control, name, label, items, hideIcon } = props;
 
   const [popupOpened, setPopupOpened] = useState(false);
 
@@ -59,16 +60,14 @@ export const ListSelectControlled = <T extends FieldValues>(
       control={control}
       name={name}
       render={({ field: { value, onChange } }) => {
-        const fullValue = items.find((item) => item.id === value);
-
         return (
           <>
             <ListItem
-              media={<div className="w-16 mr-6">{label}</div>}
               title={
                 <div className="flex flex-row">
-                  <ListItemIcon src={fullValue?.icon} />
-                  <div className="ml-4">{fullValue?.name}</div>
+                  {label}
+                  {": "}
+                  {value.length ? "Выбрано " + value.length : "Не выбрано"}
                 </div>
               }
               link
@@ -110,21 +109,30 @@ export const ListSelectControlled = <T extends FieldValues>(
                       filteredItems.map((item) => (
                         <ListItem
                           key={item.id}
-                          media={<ListItemIcon src={item.icon} />}
+                          media={!hideIcon && <ListItemIcon src={item.icon} />}
                           title={item.name}
                           onClick={() => {
-                            onChange(item.id);
-                            setPopupOpened(false);
+                            if (
+                              value.find(
+                                (_item: { id: string }) => _item.id === item.id
+                              )
+                            ) {
+                              onChange(
+                                value.filter(
+                                  (_item: { id: string }) =>
+                                    _item.id !== item.id
+                                )
+                              );
+
+                              return;
+                            }
+
+                            onChange([...value, item]);
                           }}
                           after={
-                            value === item.id && (
-                              <img
-                                src={checkIcon24}
-                                width={20}
-                                height={20}
-                                alt="check icon"
-                              />
-                            )
+                            value.find(
+                              (_item: { id: string }) => _item.id === item.id
+                            ) && <IoCheckmark />
                           }
                           className="cursor-pointer"
                         />

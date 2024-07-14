@@ -5,7 +5,7 @@ import { getBankFromId } from "@/stores/cards-store/helpers";
 import { Card } from "@/stores/cards-store/types";
 import { ListItemIcon } from "@/ui/list-item-icon";
 import { SwipeableListItem } from "@/ui/swipeable-list-item";
-import { Badge, BlockTitle, List, Page } from "konsta/react";
+import { BlockTitle, List, Page } from "konsta/react";
 import { useState } from "react";
 
 export const Main = () => {
@@ -16,7 +16,7 @@ export const Main = () => {
 
   return (
     <Page>
-      <BlockTitle>Карты</BlockTitle>
+      <BlockTitle>Мои карты</BlockTitle>
       <List strongIos outlineIos insetIos>
         {cards.map((card) => {
           const bank = getBankFromId(card.bank);
@@ -28,7 +28,6 @@ export const Main = () => {
               link
               key={card.id}
               onDelete={() => removeCard(card.id)}
-              after={<Badge>Не выбран</Badge>}
               onClick={() => setCashbackPopupOpened(card)}
             />
           );

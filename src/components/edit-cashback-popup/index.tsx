@@ -1,123 +1,98 @@
-import { addCircleIcon24 } from "@/assets/icons";
-import { Banks, Card } from "@/stores/cards-store";
-import {
-  getCashbackCategoryByBank,
-  getCategoryNameById,
-} from "@/stores/cashback-store";
+import { Card } from "@/stores/cards-store";
+import { getBankFromId } from "@/stores/cards-store/helpers";
+import { ListItemIcon } from "@/ui/list-item-icon";
+import { add } from "date-fns";
 import {
   Link,
-  List,
-  ListItem,
   Navbar,
   Page,
   Popup,
-  Stepper,
+  Segmented,
+  SegmentedButton,
 } from "konsta/react";
-import { useEffect } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import { FormLabel } from "../../ui/form-label";
-
-const DEFAULT_PERSENT = 5;
+import { MothCashbackCategories } from "./month-cashback-categories";
+import { format } from "date-fns";
+import { ru } from "date-fns/locale";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { useRef, useState } from "react";
 
 interface Props {
   isOpened: false | Card;
   close: () => void;
 }
 
-type FormValues = {
-  monthUTC: number;
-  cardId: string;
-  categories: {
-    categoryId: string;
-    percent: number;
-  }[];
-};
-
 export const EditCashbackPopup = ({ isOpened, close }: Props) => {
+  const date = new Date();
+  const curMonth = date.getFullYear() * 100 + date.getMonth();
+  const nextMonthDate = add(date, { months: 1 });
+  const nextMonth =
+    nextMonthDate.getFullYear() * 100 + nextMonthDate.getMonth();
+  const [activeSlide, setActiveSlide] = useState(0);
+
   let card: Card | undefined = undefined;
   if (isOpened) {
     card = isOpened;
   }
 
-  let defaultValues = {
-    monthUTC: 0,
-    cardId: card?.id,
-    categories: [],
-  };
-
-  const { control, /*handleSubmit,*/ reset, clearErrors } = useForm<FormValues>(
-    {
-      defaultValues,
-      mode: "onBlur",
-    }
-  );
-
-  const { fields, append /*remove*/ } = useFieldArray({
-    name: "categories",
-    control,
-  });
-
-  const resetForm = () => {
-    reset(defaultValues);
-    clearErrors();
-  };
-
   const cancelHandler = () => {
-    resetForm();
     close();
   };
 
-  useEffect(() => {
-    if (isOpened) {
-      resetForm();
-    }
-  }, [isOpened]);
+  const swiperRef = useRef<SwiperRef>(null);
 
   return (
-    <Popup opened={Boolean(isOpened)} onBackdropClick={cancelHandler}>
+    <Popup opened={Boolean(isOpened)}>
       <Page>
         <Navbar
-          title={card?.title}
+          title={
+            <div className="flex flex-row">
+              <ListItemIcon src={getBankFromId(card?.bank)?.icon} />
+              <div className="ml-1"> {card?.title}</div>
+            </div>
+          }
           right={
             <Link navbar onClick={cancelHandler}>
               Закрыть
             </Link>
           }
+          subnavbar={
+            <Segmented strong>
+              {[date, nextMonthDate].map((value, index) => (
+                <SegmentedButton
+                  key={index}
+                  strong
+                  active={activeSlide === index}
+                  onClick={() => {
+                    swiperRef.current?.swiper.slideTo(index);
+                    setActiveSlide(index);
+                  }}
+                >
+                  {format(value, "LLLL", { locale: ru })}
+                </SegmentedButton>
+              ))}
+            </Segmented>
+          }
         />
-        <List strongIos outlineIos insetIos>
-          {fields.map((field) => {
-            return (
-              <ListItem
-                media={<Stepper value={field.percent} outline />}
-                title={
-                  <FormLabel>{getCategoryNameById(field.categoryId)}</FormLabel>
-                }
-                link
-              />
-            );
-          })}
-
-          <ListItem
-            media={
-              <img
-                src={addCircleIcon24}
-                width={28}
-                height={28}
-                alt="add circle icon"
-              />
-            }
-            title="Добавить категорию"
-            onClick={() => {
-              if (card) {
-                append({
-                  categoryId: getCashbackCategoryByBank(card.bank as Banks)[0]
-                    .id,
-                  percent: DEFAULT_PERSENT,
-                });
-              }
-            }}
-          />
-        </List>
+        {card && (
+          <>
+            <Swiper ref={swiperRef} slidesPerView={1} allowTouchMove={false}>
+              <SwiperSlide>
+                <MothCashbackCategories
+                  month={curMonth}
+                  card={card}
+                  isOpened={Boolean(isOpened)}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <MothCashbackCategories
+                  month={nextMonth}
+                  card={card}
+                  isOpened={Boolean(isOpened)}
+                />
+              </SwiperSlide>
+            </Swiper>
+          </>
+        )}
       </Page>
     </Popup>
   );

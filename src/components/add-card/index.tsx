@@ -1,9 +1,8 @@
-import { addCircleIcon24 } from "@/assets/icons";
 import { useCardsStore } from "@/stores";
 import { genCardId } from "@/stores/cards-store/helpers";
 import { BANKS } from "@/stores/cards-store/types";
 import { ListInputControlled } from "@/ui/list-input-controlled";
-import { ListSelectControlled } from "@/ui/list-select-controlled";
+import { ListItemSelectControlled } from "@/ui/list-item-select-controlled";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, List, ListItem, Popup, Toolbar } from "konsta/react";
 import { useEffect, useState } from "react";
@@ -12,6 +11,7 @@ import { useForm } from "react-hook-form";
 import "swiper/css";
 import { z } from "zod";
 import { FormLabel } from "../../ui/form-label";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 interface Props {}
 
@@ -69,14 +69,7 @@ export const AddCard = ({}: Props) => {
   return (
     <>
       <ListItem
-        media={
-          <img
-            src={addCircleIcon24}
-            width={28}
-            height={28}
-            alt="add circle icon"
-          />
-        }
+        media={<IoAddCircleOutline size={24} />}
         title="Добавить карту..."
         onClick={() => setPopupOpened(true)}
         className="cursor-pointer"
@@ -102,7 +95,7 @@ export const AddCard = ({}: Props) => {
                 name="title"
                 error={errors.title?.message}
               />
-              <ListSelectControlled
+              <ListItemSelectControlled
                 label="Банк"
                 items={BANKS}
                 control={control}
