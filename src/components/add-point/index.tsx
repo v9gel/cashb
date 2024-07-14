@@ -1,34 +1,36 @@
-import { useCardsStore } from "@/stores";
-import { genCardId } from "@/stores/cards-store/helpers";
-import { BANKS } from "@/stores/cards-store/types";
+import { genPointId } from "@/stores/points-store/helpers";
+import { usePointsStore } from "@/stores/points-store/store";
 import { ListInputControlled } from "@/ui/list-input-controlled";
-import { ListItemSelectControlled } from "@/ui/list-item-select-controlled";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, List, ListItem, Popup, Toolbar } from "konsta/react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
+import { IoAddCircleOutline } from "react-icons/io5";
 import "swiper/css";
 import { z } from "zod";
 import { FormLabel } from "../../ui/form-label";
-import { IoAddCircleOutline } from "react-icons/io5";
 
 interface Props {}
 
-const CardSchema = z.object({
+const PointSchema = z.object({
   id: z.string(),
-  title: z.string().min(3).max(50),
-  bank: z.string(),
+  name: z.string().min(3).max(50),
+  mcc: z
+    .string()
+    .min(4)
+    .max(4)
+    .regex(/\d\d\d\d/),
 });
 
-type CardSchemaType = z.infer<typeof CardSchema>;
+type PointSchemaType = z.infer<typeof PointSchema>;
 
-const DEFAULT_VALUES = { id: genCardId(), title: "", bank: BANKS[0].id };
+const DEFAULT_VALUES = { id: genPointId(), name: "", mcc: "" };
 
-export const AddCard = ({}: Props) => {
+export const AddPoint = ({}: Props) => {
   const [popupOpened, setPopupOpened] = useState(false);
 
-  const { addCard } = useCardsStore();
+  const { addPoint } = usePointsStore();
   const defaultValues = DEFAULT_VALUES;
 
   const {
@@ -37,13 +39,13 @@ export const AddCard = ({}: Props) => {
     handleSubmit,
     clearErrors,
     reset,
-  } = useForm<CardSchemaType>({
+  } = useForm<PointSchemaType>({
     defaultValues,
-    resolver: zodResolver(CardSchema),
+    resolver: zodResolver(PointSchema),
   });
 
   const resetForm = () => {
-    defaultValues.id = genCardId();
+    defaultValues.id = genPointId();
 
     reset(defaultValues);
     clearErrors();
@@ -55,7 +57,10 @@ export const AddCard = ({}: Props) => {
 
   const submitHandler = () => {
     return handleSubmit((data) => {
-      addCard(data);
+      addPoint({
+        ...data,
+        mcc: parseInt(data.mcc),
+      });
       setPopupOpened(false);
     })();
   };
@@ -70,7 +75,7 @@ export const AddCard = ({}: Props) => {
     <>
       <ListItem
         media={<IoAddCircleOutline size={24} />}
-        title="Добавить карту"
+        title="Добавить точку"
         onClick={() => setPopupOpened(true)}
         className="cursor-pointer"
       />
@@ -81,7 +86,7 @@ export const AddCard = ({}: Props) => {
               <Link toolbar onClick={cancelHandler}>
                 Отмена
               </Link>
-              <b>Новая карта</b>
+              <b>Новая точка</b>
               <Link toolbar onClick={submitHandler}>
                 Готово
               </Link>
@@ -92,14 +97,16 @@ export const AddCard = ({}: Props) => {
                 type="text"
                 placeholder="Обязательное поле"
                 control={control}
-                name="title"
-                error={errors.title?.message}
+                name="name"
+                error={errors.name?.message}
               />
-              <ListItemSelectControlled
-                label="Банк"
-                items={BANKS}
+              <ListInputControlled
+                media={<FormLabel>MCC</FormLabel>}
+                type="text"
+                placeholder="Обязательное поле"
                 control={control}
-                name="bank"
+                name="mcc"
+                error={errors.mcc?.message}
               />
             </List>
           </div>
