@@ -14,7 +14,7 @@ type FormValues = {
   cardId: string;
   categories: {
     name: string;
-    categoryId: string;
+    id: string;
     percent: number;
   }[];
 };
@@ -90,7 +90,7 @@ export const MothCashbackCategories = ({ month, card, isOpened }: Props) => {
               control={control}
               name={`categories.${index}.percent`}
               label={category.name}
-              key={category.categoryId}
+              key={category.id}
             />
           );
         })}

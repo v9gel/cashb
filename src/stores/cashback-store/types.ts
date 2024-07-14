@@ -10,7 +10,7 @@ export interface Cashback {
     cardId: string;
     categories: {
       name: string;
-      categoryId: string;
+      id: string;
       percent: number;
     }[];
 }
