@@ -1,12 +1,9 @@
-import alfabankLogo from "@/assets/banks/alfabank.svg";
-import tbankLogo from "@/assets/banks/tbank.svg";
-import ozonLogo from "@/assets/banks/ozon.svg";
-import yandexLogo from "@/assets/banks/yandex.svg";
+import { alfabankLogo, ozonLogo, tbankLogo, yandexLogo } from "@/assets/banks";
 
 export interface Bank {
   id: string;
   name: string;
-  logo: React.ReactNode;
+  icon: string;
 }
 
 export enum Banks {
@@ -20,22 +17,22 @@ export const BANKS: Bank[] = [
   {
     id: Banks.Alfabank,
     name: "Альфа-банк",
-    logo: <img src={alfabankLogo} width={28} height={28} alt="alfabank logo" />,
+    icon: alfabankLogo,
   },
   {
     id: Banks.Tbank,
     name: "Т-Банк",
-    logo: <img src={tbankLogo} width={28} height={28} alt="tbank logo" />,
+    icon: tbankLogo,
   },
   {
     id: Banks.Ozon,
     name: "Ozon",
-    logo: <img src={ozonLogo} width={28} height={28} alt="ozon logo" />,
+    icon: ozonLogo,
   },
   {
     id: Banks.Yandex,
     name: "Яндекс",
-    logo: <img src={yandexLogo} width={28} height={28} alt="yandex logo" />,
+    icon: yandexLogo,
   },
 ];
 

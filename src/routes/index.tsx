@@ -6,4 +6,8 @@ export const router = createHashRouter([
     path: "/",
     element: <Main />,
   },
+  {
+    path: "/card/:id",
+    element: <Main />,
+  },
 ]);
