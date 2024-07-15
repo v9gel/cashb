@@ -10,12 +10,14 @@ export type Props<
   name: TName;
   control?: Control<TFieldValues>;
   label: string;
+  min: number;
+  max: number;
 } & StepperProps;
 
 export const ListItemStepperControlled = <T extends FieldValues>(
   props: Props<T>
 ) => {
-  const { control, name, label, ...restProps } = props;
+  const { control, name, label, min, max, ...restProps } = props;
 
   return (
     <Controller
@@ -28,8 +30,16 @@ export const ListItemStepperControlled = <T extends FieldValues>(
             <Stepper
               value={value}
               smallIos
-              onPlus={() => onChange(value + 1)}
-              onMinus={() => onChange(value - 1)}
+              onPlus={() => {
+                if (value < max) {
+                  onChange(value + 1);
+                }
+              }}
+              onMinus={() => {
+                if (value > min) {
+                  onChange(value - 1);
+                }
+              }}
               {...restProps}
             />
           }

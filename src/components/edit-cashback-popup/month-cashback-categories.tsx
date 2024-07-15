@@ -91,6 +91,8 @@ export const MothCashbackCategories = ({ month, card, isOpened }: Props) => {
               name={`categories.${index}.percent`}
               label={category.name}
               key={category.id}
+              min={0}
+              max={100}
             />
           );
         })}
