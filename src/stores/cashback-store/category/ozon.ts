@@ -58,7 +58,7 @@ export const ozonCategory: CashbackCategory[] = [
     id: "ozon-category-8",
     bank: Banks.Ozon,
     mcc: [5309],
-    name: "Магазины беспошлинной торговли — Duty Free",
+    name: "Duty Free",
   },
   {
     id: "ozon-category-9",
@@ -94,7 +94,7 @@ export const ozonCategory: CashbackCategory[] = [
     id: "ozon-category-14",
     bank: Banks.Ozon,
     mcc: [5172, 5541, 5542, 5983],
-    name: "Топливо и автомобильные заправочные станции",
+    name: "Топливо и АЗС",
   },
   {
     id: "ozon-category-15",
