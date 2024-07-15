@@ -44,18 +44,22 @@ export const DetailPointPopup = ({ isOpened, close }: Props) => {
       if (point?.mcc) {
         const cashback = getCashback({ cardId: card.id, month: curMonth });
 
-        const percentedCategory = cashback?.categories.find((_category) => {
-          const category = getCategoryById(_category.id);
+        const percentedCategory =
+          cashback?.categories
+            .filter((_category) => {
+              const category = getCategoryById(_category.id);
 
-          return (
-            category?.mcc.includes(point.mcc) ||
-            category?.mcc
-              .filter((_mcc) => Array.isArray(_mcc))
-              .some(([first, second]) => {
-                return first <= point.mcc && point.mcc <= second;
-              })
-          );
-        });
+              return (
+                category?.mcc.includes(point.mcc) ||
+                category?.mcc
+                  .filter((_mcc) => Array.isArray(_mcc))
+                  .some(([first, second]) => {
+                    return first <= point.mcc && point.mcc <= second;
+                  })
+              );
+            })
+            .sort((a, b) => -((a?.percent ?? 0) - (b?.percent ?? 0)))[0] ??
+          undefined;
 
         if (maxPercent.current < (percentedCategory?.percent ?? 0)) {
           maxPercent.current = percentedCategory?.percent ?? 0;
