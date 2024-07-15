@@ -102,7 +102,7 @@ export const tbankCategory: CashbackCategory[] = [
     id: "tbank-category-13",
     bank: Banks.Tbank,
     mcc: [2741, 5111, 5192, 5942, 5994],
-    name: "Красота",
+    name: "Книги",
   },
   {
     id: "tbank-category-14",
