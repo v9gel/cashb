@@ -1,6 +1,11 @@
-import { deleteIcon24, editIcon24 } from "@/assets/icons";
-import { ListItem } from "konsta/react";
+import { useOperatingSystem } from "@siberiacancode/reactuse";
+import { List, ListItem, Popover } from "konsta/react";
+import { nanoid } from "nanoid";
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import { IoPencil, IoTrashOutline } from "react-icons/io5";
 import SwipeToRevealActions from "react-swipe-to-reveal-actions";
+import { ListItemTitle } from "./list-item-title";
 
 type ListItemProps = React.ComponentProps<typeof ListItem>;
 
@@ -10,15 +15,19 @@ type Props = {
 } & ListItemProps;
 
 export const SwipeableListItem = (props: Props) => {
-  const { onDelete, onEdit, ...restProps } = props;
+  const { onDelete, onEdit, title, media, ...restProps } = props;
+
+  const operatingSystem = useOperatingSystem();
 
   const actionButtons = [];
 
   if (onEdit) {
     actionButtons.push({
+      title: "Изменить",
+      icon: <IoPencil />,
       content: (
         <div className="flex bg-orange-500 h-full flex-col justify-center items-center">
-          <img src={editIcon24} width={18} height={18} alt="delete icon" />
+          <IoPencil color="white" />
           <span className="text-white text-sm">Изменить</span>
         </div>
       ),
@@ -28,9 +37,11 @@ export const SwipeableListItem = (props: Props) => {
 
   if (onDelete) {
     actionButtons.push({
+      title: "Удалить",
+      icon: <IoTrashOutline color="red" />,
       content: (
         <div className="flex bg-red-500 h-full flex-col justify-center items-center">
-          <img src={deleteIcon24} width={18} height={18} alt="delete icon" />
+          <IoTrashOutline color="white" />
           <span className="text-white text-sm">Удалить</span>
         </div>
       ),
@@ -38,17 +49,69 @@ export const SwipeableListItem = (props: Props) => {
     });
   }
 
+  const [popoverOpened, setPopoverOpened] = useState(false);
+
+  const popoverTarget = `popover-target-${nanoid()}`;
+
+  if (["ios", "android"].includes(operatingSystem)) {
+    return (
+      <SwipeToRevealActions
+        actionButtons={actionButtons}
+        containerStyle={{
+          display: "flex",
+        }}
+        hideDotsButton
+        height={"45.5px"}
+        actionButtonMinWidth={80}
+      >
+        <ListItem
+          {...restProps}
+          title={<ListItemTitle title={title} media={media} />}
+          className="w-full"
+        />
+      </SwipeToRevealActions>
+    );
+  }
+
   return (
-    <SwipeToRevealActions
-      actionButtons={actionButtons}
-      containerStyle={{
-        display: "flex",
-      }}
-      hideDotsButton
-      height={"45.5px"}
-      actionButtonMinWidth={80}
-    >
-      <ListItem {...restProps} className="w-full" />
-    </SwipeToRevealActions>
+    <>
+      <ListItem
+        {...restProps}
+        title={<ListItemTitle title={title} media={media} />}
+        className={`w-full ${popoverTarget}`}
+        onContextMenu={(event) => {
+          event.preventDefault();
+          setPopoverOpened(true);
+        }}
+      />
+      {createPortal(
+        <Popover
+          opened={popoverOpened}
+          target={`.${popoverTarget}`}
+          onBackdropClick={() => setPopoverOpened(false)}
+        >
+          <List nested>
+            {actionButtons.map((actionButton) => {
+              return (
+                <ListItem
+                  title={
+                    <ListItemTitle
+                      title={actionButton.title}
+                      media={actionButton.icon}
+                    />
+                  }
+                  onClick={() => {
+                    actionButton.onClick();
+                    setPopoverOpened(false);
+                  }}
+                  className="cursor-pointer"
+                />
+              );
+            })}
+          </List>
+        </Popover>,
+        document.body
+      )}
+    </>
   );
 };

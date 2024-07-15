@@ -1,16 +1,18 @@
 import { genPointId } from "@/stores/points-store/helpers";
 import { usePointsStore } from "@/stores/points-store/store";
 import { ListInputControlled } from "@/ui/list-input-controlled";
+import { ListItemTitle } from "@/ui/list-item-title";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, List, ListItem, Popup, Toolbar } from "konsta/react";
+import { Fab, Link, List, ListItem, Popup, Toolbar } from "konsta/react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
-import { IoAddCircleOutline } from "react-icons/io5";
+import { IoAdd, IoAddCircleOutline } from "react-icons/io5";
 import "swiper/css";
 import { z } from "zod";
 import { FormLabel } from "../../ui/form-label";
 
+const HIDE_TEXT_ON_FAB_POINTS_COUNT = 3;
 interface Props {}
 
 const PointSchema = z.object({
@@ -30,7 +32,7 @@ const DEFAULT_VALUES = { id: genPointId(), name: "", mcc: "" };
 export const AddPoint = ({}: Props) => {
   const [popupOpened, setPopupOpened] = useState(false);
 
-  const { addPoint } = usePointsStore();
+  const { points, addPoint } = usePointsStore();
   const defaultValues = DEFAULT_VALUES;
 
   const {
@@ -73,11 +75,27 @@ export const AddPoint = ({}: Props) => {
 
   return (
     <>
-      <ListItem
-        media={<IoAddCircleOutline size={24} />}
-        title="Добавить точку"
+      {!points.length && (
+        <ListItem
+          title={
+            <ListItemTitle
+              title="Добавить первую точку"
+              media={<IoAddCircleOutline size={24} />}
+            />
+          }
+          onClick={() => setPopupOpened(true)}
+          className="cursor-pointer"
+        />
+      )}
+      <Fab
+        className="fixed right-4-safe bottom-4-safe z-20"
+        icon={<IoAdd />}
         onClick={() => setPopupOpened(true)}
-        className="cursor-pointer"
+        text={
+          points.length < HIDE_TEXT_ON_FAB_POINTS_COUNT
+            ? "Добавить точку"
+            : undefined
+        }
       />
       {createPortal(
         <Popup opened={popupOpened}>

@@ -47,8 +47,6 @@ export const Main = () => {
 
       <BlockTitle>Мои точки</BlockTitle>
       <List strongIos outlineIos insetIos>
-        <AddPoint />
-
         {points.map((point) => {
           return (
             <SwipeableListItem
@@ -60,6 +58,7 @@ export const Main = () => {
             />
           );
         })}
+        <AddPoint />
       </List>
 
       <EditCashbackPopup

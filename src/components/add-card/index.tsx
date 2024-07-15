@@ -12,6 +12,7 @@ import "swiper/css";
 import { z } from "zod";
 import { FormLabel } from "../../ui/form-label";
 import { IoAddCircleOutline } from "react-icons/io5";
+import { ListItemTitle } from "@/ui/list-item-title";
 
 interface Props {}
 
@@ -69,8 +70,12 @@ export const AddCard = ({}: Props) => {
   return (
     <>
       <ListItem
-        media={<IoAddCircleOutline size={24} />}
-        title="Добавить карту"
+        title={
+          <ListItemTitle
+            title="Новая карта"
+            media={<IoAddCircleOutline size={24} />}
+          />
+        }
         onClick={() => setPopupOpened(true)}
         className="cursor-pointer"
       />
