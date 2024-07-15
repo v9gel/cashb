@@ -1,4 +1,10 @@
-import { alfabankLogo, ozonLogo, tbankLogo, yandexLogo } from "@/assets/banks";
+import {
+  alfabankLogo,
+  ozonLogo,
+  tbankLogo,
+  vtbLogo,
+  yandexLogo,
+} from "@/assets/banks";
 
 export interface Bank {
   id: string;
@@ -11,6 +17,7 @@ export enum Banks {
   Tbank = "tbank",
   Ozon = "ozon",
   Yandex = "yandex",
+  Vtb = "vtb",
 }
 
 export const BANKS: Bank[] = [
@@ -33,6 +40,11 @@ export const BANKS: Bank[] = [
     id: Banks.Yandex,
     name: "Яндекс",
     icon: yandexLogo,
+  },
+  {
+    id: Banks.Vtb,
+    name: "ВТБ",
+    icon: vtbLogo,
   },
 ];
 

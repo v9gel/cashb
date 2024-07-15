@@ -1,0 +1,253 @@
+import { Banks } from "@/stores/cards-store";
+import { CashbackCategory } from "../types";
+
+// источник - https://storage.multibonus.ru/Pravila_programmy_loyalnosti_Multibonus_Banka_VTB_PAO_1f38d88f03.pdf
+export const vtbCategory: CashbackCategory[] = [
+  {
+    id: "vtb-category-0",
+    bank: Banks.Vtb,
+    mcc: [[0, 9999]],
+    name: "Все покупки",
+  },
+  {
+    id: "vtb-category-1",
+    bank: Banks.Vtb,
+    mcc: [5412, 5462, 5411, 5422, 5441, 5451, 5499, 9751],
+    name: "Супермаркеты",
+  },
+  {
+    id: "vtb-category-2",
+    bank: Banks.Vtb,
+    mcc: [5122, 5912],
+    name: "Аптеки",
+  },
+  {
+    id: "vtb-category-3",
+    bank: Banks.Vtb,
+    mcc: [
+      8050, 4119, 5047, 5975, 5976, 8011, 8021, 8031, 8041, 8042, 8043, 8044,
+      8049, 8062, 8071, 8099,
+    ],
+    name: "Здоровье",
+  },
+  {
+    id: "vtb-category-4",
+    bank: Banks.Vtb,
+    mcc: [5812, 5811, 5813, 5814],
+    name: "Кафе и рестораны",
+  },
+  {
+    id: "vtb-category-5",
+    bank: Banks.Vtb,
+    mcc: [
+      5137, 5611, 5621, 5651, 5691, 5699, 5931, 5681, 5948, 5139, 5661, 5631,
+    ],
+    name: "Одежда и обувь",
+  },
+  {
+    id: "vtb-category-6",
+    bank: Banks.Vtb,
+    mcc: [5945, 5641],
+    name: "Детские товары",
+  },
+  {
+    id: "vtb-category-7",
+    bank: Banks.Vtb,
+    mcc: [4111, 4131, 4789],
+    name: "Транспорт",
+  },
+  {
+    id: "vtb-category-8",
+    bank: Banks.Vtb,
+    mcc: [4121],
+    name: "Такси",
+  },
+  {
+    id: "vtb-category-9",
+    bank: Banks.Vtb,
+    mcc: [3351 - 3441, 7513, 7519, 7512],
+    name: "Аренда авто",
+  },
+  {
+    id: "vtb-category-10",
+    bank: Banks.Vtb,
+    mcc: [5698, 7230, 7297, 7298, 5977],
+    name: "Красота",
+  },
+  {
+    id: "vtb-category-11",
+    bank: Banks.Vtb,
+    mcc: [5997, 5946, 4812, 5044, 5045, 5046, 5722, 5732],
+    name: "Электроника",
+  },
+  {
+    id: "vtb-category-12",
+    bank: Banks.Vtb,
+    mcc: [[3000, 3301], 4511, 4582],
+    name: "Авиабилеты",
+  },
+  {
+    id: "vtb-category-13",
+    bank: Banks.Vtb,
+    mcc: [5309],
+    name: "Duty Free",
+  },
+  {
+    id: "vtb-category-14",
+    bank: Banks.Vtb,
+    mcc: [[3501, 3836], 7011, 7012, 7033, 7032],
+    name: "Отели",
+  },
+  {
+    id: "vtb-category-15",
+    bank: Banks.Vtb,
+    mcc: [4011, 4112],
+    name: "Ж/д билеты",
+  },
+  {
+    id: "vtb-category-16",
+    bank: Banks.Vtb,
+    mcc: [5962, 4723, 4722, 4411],
+    name: "Турагентства",
+  },
+  {
+    id: "vtb-category-17",
+    bank: Banks.Vtb,
+    mcc: [5541, 5172, 5542, 5983, 9752, 5552],
+    name: "АЗС",
+  },
+  {
+    id: "vtb-category-18",
+    bank: Banks.Vtb,
+    mcc: [5531, 5532, 5533, 7531, 7534, 7535, 7538, 7542, 7549, 7511],
+    name: "Автоуслуги",
+  },
+  {
+    id: "vtb-category-19",
+    bank: Banks.Vtb,
+    mcc: [4784, 7523],
+    name: "Платные дороги",
+  },
+  {
+    id: "vtb-category-20",
+    bank: Banks.Vtb,
+    mcc: [
+      780, 1520, 1711, 1731, 1740, 1750, 1761, 1771, 1799, 2842, 5021, 5039,
+      5051, 5065, 5072, 5074, 5131, 5169, 5198, 5200, 5211, 5231, 5251, 5261,
+      5311, 5331, 5712, 5713, 5714, 5718, 5719, 5950, 5998, 7622, 7623, 7629,
+      7641, 7692, 7699, 5996, 5949,
+    ],
+    name: "Дом и ремонт",
+  },
+  {
+    id: "vtb-category-21",
+    bank: Banks.Vtb,
+    mcc: [8211, 8220, 8241, 8244, 8249, 8299, 8351],
+    name: "Образование",
+  },
+  {
+    id: "vtb-category-22",
+    bank: Banks.Vtb,
+    mcc: [7941, 7992, 7997],
+    name: "Фитнес",
+  },
+  {
+    id: "vtb-category-23",
+    bank: Banks.Vtb,
+    mcc: [5940, 5941, 5655],
+    name: "Спортивные товары",
+  },
+  {
+    id: "vtb-category-24",
+    bank: Banks.Vtb,
+    mcc: [6300, 6381, 6399, 5960],
+    name: "Страхование",
+  },
+  {
+    id: "vtb-category-25",
+    bank: Banks.Vtb,
+    mcc: [5697, 7210, 7211, 7216, 7217, 7251, 7342, 7349],
+    name: "Бытовые услуги",
+  },
+  {
+    id: "vtb-category-26",
+    bank: Banks.Vtb,
+    mcc: [5193, 5992],
+    name: "Цветы",
+  },
+  {
+    id: "vtb-category-27",
+    bank: Banks.Vtb,
+    mcc: [5094, 5944, 7631],
+    name: "Украшения и бижутерия",
+  },
+  {
+    id: "vtb-category-28",
+    bank: Banks.Vtb,
+    mcc: [742, 5995],
+    name: "Зоотовары",
+  },
+  {
+    id: "vtb-category-29",
+    bank: Banks.Vtb,
+    mcc: [5734, 5735, 5815, 5816, 5817, 5818, 7829, 7841, 7993, 7994],
+    name: "Цифровой контент",
+  },
+  {
+    id: "vtb-category-30",
+    bank: Banks.Vtb,
+    mcc: [
+      5733, 5947, 5968, 7221, 7333, 7395, 7800, 7801, 7802, 7911, 7932, 7933,
+      7991, 7996, 7998, 7999, 9754, 7929,
+    ],
+    name: "Развлечения",
+  },
+  {
+    id: "vtb-category-31",
+    bank: Banks.Vtb,
+    mcc: [7832, 7833, 7922],
+    name: "Театры и кино",
+  },
+  {
+    id: "vtb-category-32",
+    bank: Banks.Vtb,
+    mcc: [4900],
+    name: "Услуги ЖКХ",
+  },
+  {
+    id: "vtb-category-33",
+    bank: Banks.Vtb,
+    mcc: [5715, 5921],
+    name: "Алкоголь",
+  },
+  {
+    id: "vtb-category-34",
+    bank: Banks.Vtb,
+    mcc: [5973, 5937, 5970, 5971, 5972, 5932],
+    name: "Искусство",
+  },
+  {
+    id: "vtb-category-35",
+    bank: Banks.Vtb,
+    mcc: [5111, 5943, 2741, 5192, 5942, 5994],
+    name: "Книги и канцтовары",
+  },
+  {
+    id: "vtb-category-36",
+    bank: Banks.Vtb,
+    mcc: [5262, 5300, 7278],
+    name: "Маркетплейсы",
+  },
+  {
+    id: "vtb-category-37",
+    bank: Banks.Vtb,
+    mcc: [5013, 5271, 5511, 5521, 5551, 5561, 5571, 5592, 5598, 5599],
+    name: "Продажа авто",
+  },
+  {
+    id: "vtb-category-38",
+    bank: Banks.Vtb,
+    mcc: [4899, 4813, 4815, 4821, 4816, 4814],
+    name: "Услуги связи",
+  },
+];
