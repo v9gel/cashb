@@ -4,6 +4,12 @@ import { CashbackCategory } from "../types";
 // источник - https://docs.ozon.ru/common/ozon-finance/sales/outside/?country=RU
 export const ozonCategory: CashbackCategory[] = [
   {
+    id: "ozon-category-0",
+    bank: Banks.Ozon,
+    mcc: [[0, 9999]],
+    name: "Все покупки",
+  },
+  {
     id: "ozon-category-1",
     bank: Banks.Ozon,
     mcc: [8211, 8220, 8241, 8244, 8249, 8299, 8351, 8493, 8494],

@@ -4,6 +4,12 @@ import { CashbackCategory } from "../types";
 // источник - https://yandex.ru/legal/account_welcome_points/
 export const yandexCategory: CashbackCategory[] = [
     {
+        id: "yandex-category-0",
+        bank: Banks.Yandex,
+        mcc: [[0, 9999]],
+        name: "Все покупки",
+    },
+    {
         id: "yandex-category-1",
         bank: Banks.Yandex,
         mcc: [5811, 5812, 5813, 5814],

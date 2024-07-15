@@ -4,6 +4,12 @@ import { CashbackCategory } from "../types";
 // источник - https://alfabank.servicecdn.ru/marketing/22/47/marketing/vse_cat.pdf
 export const alfabankCategory: CashbackCategory[] = [
   {
+    id: "alfabank-category-0",
+    bank: Banks.Alfabank,
+    mcc: [[0, 9999]],
+    name: "Все покупки",
+  },
+  {
     id: "alfabank-category-1",
     bank: Banks.Alfabank,
     mcc: [

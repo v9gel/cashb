@@ -4,6 +4,12 @@ import { CashbackCategory } from "../types";
 // источник - https://img-cdn.tinkoffjournal.ru/-/mcc_new_codes.pdf
 export const tbankCategory: CashbackCategory[] = [
   {
+    id: "tbank-category-0",
+    bank: Banks.Tbank,
+    mcc: [[0, 9999]],
+    name: "Все покупки",
+  },
+  {
     id: "tbank-category-1",
     bank: Banks.Tbank,
     mcc: [[3000, 3350], 4418, 4304, 4511, 4415, 4582],
