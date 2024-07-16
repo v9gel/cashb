@@ -10,7 +10,11 @@ import { IoCardOutline } from "react-icons/io5";
 import { AddCard } from "../add-card";
 import { EditCashbackPopup } from "../edit-cashback-popup";
 
-export const Header = () => {
+type Props = {
+  subnavbar?: React.ReactNode;
+};
+
+export const Header = ({ subnavbar }: Props) => {
   const [cadsPopupOpened, setCardsPopupOpened] = useState(false);
   const [addCardPopupOpened, setAddCardPopupOpened] = useState(false);
   const { cards, removeCard } = useCardsStore();
@@ -49,6 +53,7 @@ export const Header = () => {
             </Link>
           </div>
         }
+        subnavbar={subnavbar}
       />
       <Popup
         opened={cadsPopupOpened}

@@ -2,7 +2,7 @@ import { useCardsStore } from "@/stores";
 import { getBankFromId } from "@/stores/cards-store/helpers";
 import { getCategoryById } from "@/stores/cashback-store";
 import { useCashbackStore } from "@/stores/cashback-store/store";
-import { Point } from "@/stores/points-store";
+import { Point, usePointsStore } from "@/stores/points-store";
 import { ListItemIcon } from "@/ui/list-item-icon";
 import {
   Badge,
@@ -14,7 +14,7 @@ import {
   Page,
   Popup,
 } from "konsta/react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface Props {
   isOpened: false | Point;
@@ -24,7 +24,6 @@ interface Props {
 export const DetailPointPopup = ({ isOpened, close }: Props) => {
   const date = new Date();
   const curMonth = date.getFullYear() * 100 + date.getMonth();
-  // const [maxPercent, setMaxPercent] = useState(0);
   const maxPercent = useRef(0);
 
   let point: Point | undefined = undefined;
@@ -72,6 +71,13 @@ export const DetailPointPopup = ({ isOpened, close }: Props) => {
       }
     })
     .filter((card) => card?.percent);
+
+  const { markView } = usePointsStore();
+  useEffect(() => {
+    if (point) {
+      markView(point.id);
+    }
+  }, [point]);
 
   return (
     <Popup opened={Boolean(isOpened)}>
