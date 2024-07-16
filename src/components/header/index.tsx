@@ -1,4 +1,3 @@
-import { cashbLogo } from "@/assets/icons";
 import { useCardsStore } from "@/stores";
 import { Card } from "@/stores/cards-store";
 import { getBankFromId } from "@/stores/cards-store/helpers";
@@ -9,6 +8,7 @@ import { useState } from "react";
 import { IoCardOutline } from "react-icons/io5";
 import { AddCard } from "../add-card";
 import { EditCashbackPopup } from "../edit-cashback-popup";
+import { FaCircle } from "react-icons/fa";
 
 type Props = {
   subnavbar?: React.ReactNode;
@@ -30,8 +30,8 @@ export const Header = ({ subnavbar }: Props) => {
         transparent
         left={
           <div className="flex flex-row items-center">
-            <img src={cashbLogo} width={30} height={30} />
-            <div className="ml-2 font-semibold">cashb</div>
+            <FaCircle size={30} />
+            <div className="ml-1 font-semibold">cashb</div>
           </div>
         }
         right={
