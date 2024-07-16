@@ -4,7 +4,14 @@ import { Header } from "@/components/header";
 import { Point } from "@/stores/points-store";
 import { usePointsStore } from "@/stores/points-store/store";
 import { SwipeableListItem } from "@/ui/swipeable-list-item";
-import { BlockTitle, List, ListItem, Page, Searchbar } from "konsta/react";
+import {
+  BlockTitle,
+  Card,
+  List,
+  ListItem,
+  Page,
+  Searchbar,
+} from "konsta/react";
 import { useState } from "react";
 
 const BLOCK_POINTS_COUNT = 5;
@@ -45,24 +52,26 @@ export const Main = () => {
     <Page>
       <Header
         subnavbar={
-          <Searchbar
-            onInput={handleSearch}
-            value={searchQuery}
-            onClear={handleClear}
-            placeholder={"Поиск по всем точкам"}
-            onDisable={handleDisable}
-            disableButton
-            disableButtonText="Отмена"
-            onFocus={() => {
-              setShowFiltred(true);
-            }}
-            onBlur={() => {
-              if (!searchQuery) {
-                setShowFiltred(false);
-              }
-            }}
-            id="points-searchbar"
-          />
+          points.length ? (
+            <Searchbar
+              onInput={handleSearch}
+              value={searchQuery}
+              onClear={handleClear}
+              placeholder={"Поиск по всем точкам"}
+              onDisable={handleDisable}
+              disableButton
+              disableButtonText="Отмена"
+              onFocus={() => {
+                setShowFiltred(true);
+              }}
+              onBlur={() => {
+                if (!searchQuery) {
+                  setShowFiltred(false);
+                }
+              }}
+              id="points-searchbar"
+            />
+          ) : undefined
         }
       />
       {showFiltred ? (
@@ -128,6 +137,20 @@ export const Main = () => {
             </>
           )}
         </>
+      )}
+
+      {!points.length && (
+        <Card header="Привет 👋">
+          <p>Вот несколько советов, которые помогут тебе здесь освоиться:</p>
+          <ul className="list-disc pl-4">
+            <li className="list-disc pt-2">
+              добавить точку можно с помощью кнопки в правом нижнем углу
+            </li>
+            <li className="list-disc pt-2">
+              для управления картами и кэшбэком по каждой из них нажмите
+            </li>
+          </ul>
+        </Card>
       )}
 
       <AddPoint />
