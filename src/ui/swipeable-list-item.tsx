@@ -89,6 +89,7 @@ export const SwipeableListItem = (props: Props) => {
           opened={popoverOpened}
           target={`.${popoverTarget}`}
           onBackdropClick={() => setPopoverOpened(false)}
+          className="z-10"
         >
           <List nested>
             {actionButtons.map((actionButton) => {

@@ -1,13 +1,12 @@
 import { genPointId } from "@/stores/points-store/helpers";
 import { usePointsStore } from "@/stores/points-store/store";
 import { ListInputControlled } from "@/ui/list-input-controlled";
-import { ListItemTitle } from "@/ui/list-item-title";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Fab, Link, List, ListItem, Popup, Toolbar } from "konsta/react";
+import { Fab, Link, List, Popup, Toolbar } from "konsta/react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
-import { IoAdd, IoAddCircleOutline } from "react-icons/io5";
+import { IoAdd } from "react-icons/io5";
 import "swiper/css";
 import { z } from "zod";
 import { FormLabel } from "../../ui/form-label";
@@ -75,25 +74,13 @@ export const AddPoint = ({}: Props) => {
 
   return (
     <>
-      {!points.length && (
-        <ListItem
-          title={
-            <ListItemTitle
-              title="Добавить первую точку"
-              media={<IoAddCircleOutline size={24} />}
-            />
-          }
-          onClick={() => setPopupOpened(true)}
-          className="cursor-pointer"
-        />
-      )}
       <Fab
-        className="fixed right-4-safe bottom-4-safe z-20"
+        className="fixed right-4-safe bottom-4-safe z-30"
         icon={<IoAdd />}
         onClick={() => setPopupOpened(true)}
         text={
           points.length < HIDE_TEXT_ON_FAB_POINTS_COUNT
-            ? "Добавить точку"
+            ? `Добавить${!points.length ? " первую " : " "}точку`
             : undefined
         }
       />

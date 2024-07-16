@@ -41,7 +41,7 @@ export const EditCashbackPopup = ({ isOpened, close }: Props) => {
   const swiperRef = useRef<SwiperRef>(null);
 
   return (
-    <Popup opened={Boolean(isOpened)}>
+    <Popup opened={Boolean(isOpened)} className="z-30">
       <Page>
         <Navbar
           title={
