@@ -2,7 +2,7 @@ import { genPointId } from "@/stores/points-store/helpers";
 import { usePointsStore } from "@/stores/points-store/store";
 import { ListInputControlled } from "@/ui/list-input-controlled";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Fab, Link, List, Popup, Toolbar } from "konsta/react";
+import { Fab, Link, List, Page, Popup, Toolbar } from "konsta/react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
@@ -86,7 +86,7 @@ export const AddPoint = ({}: Props) => {
       />
       {createPortal(
         <Popup opened={popupOpened}>
-          <div className="bg-ios-light-surface h-full overflow-auto">
+          <Page>
             <Toolbar top>
               <Link toolbar onClick={cancelHandler}>
                 Отмена
@@ -114,7 +114,7 @@ export const AddPoint = ({}: Props) => {
                 error={errors.mcc?.message}
               />
             </List>
-          </div>
+          </Page>
         </Popup>,
         document.body
       )}

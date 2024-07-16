@@ -5,7 +5,7 @@ import { ListInputControlled } from "@/ui/list-input-controlled";
 import { ListItemSelectControlled } from "@/ui/list-item-select-controlled";
 import { ListItemTitle } from "@/ui/list-item-title";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Link, List, ListItem, Popup, Toolbar } from "konsta/react";
+import { Link, List, ListItem, Page, Popup, Toolbar } from "konsta/react";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useForm } from "react-hook-form";
@@ -82,7 +82,7 @@ export const AddCard = ({ popupOpened, setPopupOpened }: Props) => {
       />
       {createPortal(
         <Popup opened={popupOpened} className="z-40">
-          <div className="bg-ios-light-surface h-full overflow-auto">
+          <Page>
             <Toolbar top>
               <Link toolbar onClick={cancelHandler}>
                 Отмена
@@ -108,7 +108,7 @@ export const AddCard = ({ popupOpened, setPopupOpened }: Props) => {
                 name="bank"
               />
             </List>
-          </div>
+          </Page>
         </Popup>,
         document.body
       )}
