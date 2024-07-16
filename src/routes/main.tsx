@@ -76,7 +76,7 @@ export const Main = () => {
       />
       {showFiltred ? (
         <>
-          <List strongIos outlineIos insetIos>
+          <List strong inset>
             {Boolean(filteredPoints.length) && (
               <>
                 {filteredPoints.map((point) => {
@@ -102,7 +102,7 @@ export const Main = () => {
           {Boolean(points.length) && (
             <>
               <BlockTitle>Недавно добавленные</BlockTitle>
-              <List strongIos outlineIos insetIos>
+              <List strong inset>
                 {points.slice(0, BLOCK_POINTS_COUNT).map((point) => {
                   return (
                     <SwipeableListItem
@@ -121,7 +121,7 @@ export const Main = () => {
           {Boolean(lastViewPoints.length) && (
             <>
               <BlockTitle>Недавно просмотренные</BlockTitle>
-              <List strongIos outlineIos insetIos>
+              <List strong inset>
                 {lastViewPoints.map((point) => {
                   return (
                     <SwipeableListItem

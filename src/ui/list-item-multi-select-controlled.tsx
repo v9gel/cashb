@@ -99,7 +99,7 @@ export const ListItemMultiSelectControlled = <T extends FieldValues>(
                       />
                     }
                   />
-                  <List strong insetMaterial outlineIos>
+                  <List strong insetMaterial>
                     {filteredItems.length === 0 ? (
                       <ListItem
                         title="Ничего не найдено"

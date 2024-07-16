@@ -74,7 +74,7 @@ export const MothCashbackCategories = ({ month, card, isOpened }: Props) => {
 
   return (
     <>
-      <List strongIos outlineIos insetIos>
+      <List strong inset>
         <ListItemMultiSelectControlled
           label="Категории"
           items={cashbackCategoryList}

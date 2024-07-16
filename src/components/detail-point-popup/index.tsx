@@ -91,7 +91,7 @@ export const DetailPointPopup = ({ isOpened, close }: Props) => {
           }
         />
         <BlockHeader>Кэшбэк по картам</BlockHeader>
-        <List strongIos outlineIos insetIos>
+        <List strong inset>
           {cardsWithPercents
             .sort((a, b) => -((a?.percent ?? 0) - (b?.percent ?? 0)))
             .map((card) => {

@@ -96,7 +96,7 @@ export const AddPoint = ({}: Props) => {
                 Готово
               </Link>
             </Toolbar>
-            <List strongIos insetIos>
+            <List strong inset>
               <ListInputControlled
                 media={<FormLabel>Название</FormLabel>}
                 type="text"

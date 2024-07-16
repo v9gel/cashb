@@ -3,7 +3,6 @@ import { genCardId } from "@/stores/cards-store/helpers";
 import { BANKS } from "@/stores/cards-store/types";
 import { ListInputControlled } from "@/ui/list-input-controlled";
 import { ListItemSelectControlled } from "@/ui/list-item-select-controlled";
-import { ListItemTitle } from "@/ui/list-item-title";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, List, ListItem, Page, Popup, Toolbar } from "konsta/react";
 import { useEffect } from "react";
@@ -71,12 +70,8 @@ export const AddCard = ({ popupOpened, setPopupOpened }: Props) => {
   return (
     <>
       <ListItem
-        title={
-          <ListItemTitle
-            title="Новая карта"
-            media={<IoAddCircleOutline size={24} />}
-          />
-        }
+        title={"Новая карта"}
+        media={<IoAddCircleOutline size={24} />}
         onClick={() => setPopupOpened(true)}
         className="cursor-pointer"
       />
@@ -92,7 +87,7 @@ export const AddCard = ({ popupOpened, setPopupOpened }: Props) => {
                 Готово
               </Link>
             </Toolbar>
-            <List strongIos insetIos>
+            <List strong inset>
               <ListInputControlled
                 media={<FormLabel>Название</FormLabel>}
                 type="text"

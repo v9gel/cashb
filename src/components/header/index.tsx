@@ -3,7 +3,7 @@ import { Card } from "@/stores/cards-store";
 import { getBankFromId } from "@/stores/cards-store/helpers";
 import { ListItemIcon } from "@/ui/list-item-icon";
 import { SwipeableListItem } from "@/ui/swipeable-list-item";
-import { Link, List, Navbar, Popup } from "konsta/react";
+import { Link, List, Navbar, Page, Popup } from "konsta/react";
 import { useState } from "react";
 import { IoCardOutline } from "react-icons/io5";
 import { AddCard } from "../add-card";
@@ -60,34 +60,36 @@ export const Header = ({ subnavbar }: Props) => {
         onBackdropClick={() => setCardsPopupOpened(false)}
         className="z-20"
       >
-        <Navbar
-          title="Мои карты"
-          right={
-            <Link navbar onClick={() => setCardsPopupOpened(false)}>
-              Закрыть
-            </Link>
-          }
-        />
-        <List strongIos outlineIos insetIos>
-          {cards.map((card) => {
-            const bank = getBankFromId(card.bank);
-
-            return (
-              <SwipeableListItem
-                media={<ListItemIcon src={bank?.icon} />}
-                title={card.title}
-                link
-                key={card.id}
-                onDelete={() => removeCard(card.id)}
-                onClick={() => setCashbackPopupOpened(card)}
-              />
-            );
-          })}
-          <AddCard
-            popupOpened={addCardPopupOpened}
-            setPopupOpened={setAddCardPopupOpened}
+        <Page>
+          <Navbar
+            title="Карты"
+            right={
+              <Link navbar onClick={() => setCardsPopupOpened(false)}>
+                Закрыть
+              </Link>
+            }
           />
-        </List>
+          <List strong inset>
+            {cards.map((card) => {
+              const bank = getBankFromId(card.bank);
+
+              return (
+                <SwipeableListItem
+                  media={<ListItemIcon src={bank?.icon} />}
+                  title={card.title}
+                  link
+                  key={card.id}
+                  onDelete={() => removeCard(card.id)}
+                  onClick={() => setCashbackPopupOpened(card)}
+                />
+              );
+            })}
+            <AddCard
+              popupOpened={addCardPopupOpened}
+              setPopupOpened={setAddCardPopupOpened}
+            />
+          </List>
+        </Page>
       </Popup>
 
       <EditCashbackPopup

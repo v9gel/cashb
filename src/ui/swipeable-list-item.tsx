@@ -5,7 +5,6 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { IoPencil, IoTrashOutline } from "react-icons/io5";
 import SwipeToRevealActions from "react-swipe-to-reveal-actions";
-import { ListItemTitle } from "./list-item-title";
 
 type ListItemProps = React.ComponentProps<typeof ListItem>;
 
@@ -15,7 +14,7 @@ type Props = {
 } & ListItemProps;
 
 export const SwipeableListItem = (props: Props) => {
-  const { onDelete, onEdit, title, media, ...restProps } = props;
+  const { onDelete, onEdit, ...restProps } = props;
 
   const operatingSystem = useOperatingSystem();
 
@@ -64,11 +63,7 @@ export const SwipeableListItem = (props: Props) => {
         height={"45.5px"}
         actionButtonMinWidth={80}
       >
-        <ListItem
-          {...restProps}
-          title={<ListItemTitle title={title} media={media} />}
-          className="w-full"
-        />
+        <ListItem {...restProps} className="w-full" />
       </SwipeToRevealActions>
     );
   }
@@ -77,7 +72,6 @@ export const SwipeableListItem = (props: Props) => {
     <>
       <ListItem
         {...restProps}
-        title={<ListItemTitle title={title} media={media} />}
         className={`w-full ${popoverTarget}`}
         onContextMenu={(event) => {
           event.preventDefault();
@@ -95,12 +89,8 @@ export const SwipeableListItem = (props: Props) => {
             {actionButtons.map((actionButton) => {
               return (
                 <ListItem
-                  title={
-                    <ListItemTitle
-                      title={actionButton.title}
-                      media={actionButton.icon}
-                    />
-                  }
+                  title={actionButton.title}
+                  media={actionButton.icon}
                   onClick={() => {
                     actionButton.onClick();
                     setPopoverOpened(false);
