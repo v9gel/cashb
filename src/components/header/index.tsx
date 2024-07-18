@@ -9,6 +9,7 @@ import { IoCardOutline } from "react-icons/io5";
 import { AddCard } from "../add-card";
 import { EditCashbackPopup } from "../edit-cashback-popup";
 import { FaCircle } from "react-icons/fa";
+import { EditCard } from "../edit-card";
 
 type Props = {
   subnavbar?: React.ReactNode;
@@ -21,6 +22,8 @@ export const Header = ({ subnavbar }: Props) => {
   const [cashbackPopupOpened, setCashbackPopupOpened] = useState<false | Card>(
     false
   );
+
+  const [editCard, setEditCard] = useState<Card | undefined>(undefined);
 
   return (
     <>
@@ -80,6 +83,7 @@ export const Header = ({ subnavbar }: Props) => {
                   link
                   key={card.id}
                   onDelete={() => removeCard(card.id)}
+                  onEdit={() => setEditCard(card)}
                   onClick={() => setCashbackPopupOpened(card)}
                 />
               );
@@ -91,6 +95,8 @@ export const Header = ({ subnavbar }: Props) => {
           </List>
         </Page>
       </Popup>
+
+      <EditCard card={editCard} close={() => setEditCard(undefined)} />
 
       <EditCashbackPopup
         isOpened={cashbackPopupOpened}

@@ -67,6 +67,7 @@ export const DetailPointPopup = ({ isOpened, close }: Props) => {
         return {
           ...card,
           percent: percentedCategory?.percent ?? 0,
+          categoryName: percentedCategory?.name,
         };
       }
     })
@@ -90,6 +91,11 @@ export const DetailPointPopup = ({ isOpened, close }: Props) => {
             </Link>
           }
         />
+        <BlockHeader>О точке</BlockHeader>
+        <List strong inset>
+          <ListItem title={"Название"} after={point?.name} />
+          <ListItem title={"MMC"} after={point?.mcc} />
+        </List>
         <BlockHeader>Кэшбэк по картам</BlockHeader>
         <List strong inset>
           {cardsWithPercents
@@ -101,17 +107,20 @@ export const DetailPointPopup = ({ isOpened, close }: Props) => {
                   title={card?.title}
                   key={card?.id}
                   after={
-                    card?.percent ? (
-                      <Badge
-                        colors={
-                          maxPercent.current === card.percent
-                            ? { bg: "bg-red-500" }
-                            : undefined
-                        }
-                      >
-                        {card.percent}%
-                      </Badge>
-                    ) : undefined
+                    <>
+                      <div className="mr-2">{card?.categoryName}</div>
+                      {card?.percent ? (
+                        <Badge
+                          colors={
+                            maxPercent.current === card.percent
+                              ? { bg: "bg-red-500" }
+                              : undefined
+                          }
+                        >
+                          {card.percent}%
+                        </Badge>
+                      ) : undefined}
+                    </>
                   }
                 />
               );

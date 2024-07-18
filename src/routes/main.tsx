@@ -1,5 +1,6 @@
 import { AddPoint } from "@/components/add-point";
 import { DetailPointPopup } from "@/components/detail-point-popup";
+import { EditPoint } from "@/components/edit-point";
 import { Header } from "@/components/header";
 import { Point } from "@/stores/points-store";
 import { usePointsStore } from "@/stores/points-store/store";
@@ -20,6 +21,7 @@ export const Main = () => {
   const [pointPopupOpened, setPointPopupOpened] = useState<false | Point>(
     false
   );
+  const [editPoint, setEditPoint] = useState<Point | undefined>(undefined);
 
   const { points, removePoint, lastViewIds } = usePointsStore();
 
@@ -87,6 +89,7 @@ export const Main = () => {
                       key={point.id}
                       onClick={() => setPointPopupOpened(point)}
                       onDelete={() => removePoint(point.id)}
+                      onEdit={() => setEditPoint(point)}
                     />
                   );
                 })}
@@ -111,6 +114,7 @@ export const Main = () => {
                       key={point.id}
                       onClick={() => setPointPopupOpened(point)}
                       onDelete={() => removePoint(point.id)}
+                      onEdit={() => setEditPoint(point)}
                     />
                   );
                 })}
@@ -130,6 +134,7 @@ export const Main = () => {
                       key={point.id}
                       onClick={() => setPointPopupOpened(point)}
                       onDelete={() => removePoint(point.id)}
+                      onEdit={() => setEditPoint(point)}
                     />
                   );
                 })}
@@ -154,6 +159,7 @@ export const Main = () => {
       )}
 
       <AddPoint />
+      <EditPoint point={editPoint} close={() => setEditPoint(undefined)} />
       <DetailPointPopup
         isOpened={pointPopupOpened}
         close={() => setPointPopupOpened(false)}
