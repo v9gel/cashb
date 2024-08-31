@@ -80,7 +80,7 @@ export const AddPoint = ({}: Props) => {
         onClick={() => setPopupOpened(true)}
         text={
           points.length < HIDE_TEXT_ON_FAB_POINTS_COUNT
-            ? `Добавить${!points.length ? " первую " : " "}точку`
+            ? `Добавить${!points.length ? " первую " : " "} торговую точку`
             : undefined
         }
       />
@@ -91,7 +91,7 @@ export const AddPoint = ({}: Props) => {
               <Link toolbar onClick={cancelHandler}>
                 Отмена
               </Link>
-              <b>Новая точка</b>
+              <b>Новая торговая точка</b>
               <Link toolbar onClick={submitHandler}>
                 Готово
               </Link>

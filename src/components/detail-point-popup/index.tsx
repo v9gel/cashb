@@ -91,7 +91,7 @@ export const DetailPointPopup = ({ isOpened, close }: Props) => {
             </Link>
           }
         />
-        <BlockHeader>О точке</BlockHeader>
+        <BlockHeader>О торговой точке</BlockHeader>
         <List strong inset>
           <ListItem title={"Название"} after={point?.name} />
           <ListItem title={"MMC"} after={point?.mcc} />

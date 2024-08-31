@@ -80,7 +80,7 @@ export const EditPoint = ({ point, close }: Props) => {
               <Link toolbar onClick={cancelHandler}>
                 Отмена
               </Link>
-              <b>Редактирование точки</b>
+              <b>Редактирование торговой точки</b>
               <Link toolbar onClick={submitHandler}>
                 Готово
               </Link>

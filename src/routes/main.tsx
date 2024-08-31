@@ -59,7 +59,7 @@ export const Main = () => {
               onInput={handleSearch}
               value={searchQuery}
               onClear={handleClear}
-              placeholder={"Поиск по всем точкам"}
+              placeholder={"Поиск по всем торговым точкам"}
               onDisable={handleDisable}
               disableButton
               disableButtonText="Отмена"
@@ -149,10 +149,12 @@ export const Main = () => {
           <p>Вот несколько советов, которые помогут тебе здесь освоиться:</p>
           <ul className="list-disc pl-4">
             <li className="list-disc pt-2">
-              добавить точку можно с помощью кнопки в правом нижнем углу
+              добавить торговую точку можно с помощью кнопки в правом нижнем
+              углу
             </li>
             <li className="list-disc pt-2">
-              для управления картами и кэшбэком по каждой из них нажмите
+              для управления картами и кэшбэком по каждой из них нажмите на
+              значок карты в правом верхнем углу
             </li>
           </ul>
         </Card>
