@@ -221,4 +221,10 @@ export const alfabankCategory: CashbackCategory[] = [
     mcc: [5094, 5944],
     name: "Ювелирные изделия",
   },
+  {
+    id: "alfabank-category-25",
+    bank: Banks.Alfabank,
+    mcc: [7032, 7932, 7933, 7996, 7998, 7999, 7941, 7992, 7997],
+    name: "Активный отдых",
+  },
 ];
